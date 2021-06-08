@@ -18,7 +18,7 @@ class ClusterArray
 
         foreach ($clients as $client) {
             if (!$client instanceof Client) {
-                throw new InvalidType("Clients has to be a instance of Client class");
+                throw new InvalidType("Clients has to be a instance of CoinRedis\Client class");
             }
 
             $this->hosts->add($client->host());

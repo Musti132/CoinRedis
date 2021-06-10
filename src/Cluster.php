@@ -1,25 +1,29 @@
 <?php
+
 namespace CoinRedis;
 
 use CoinRedis\ClusterArray;
 use DateTime;
 
-class Cluster{
+class Cluster extends ClusterArray
+{
 
-    private ClusterArray $cluster;
-
-    public function __construct(ClusterArray $clients){
-        $this->cluster = $clients;
+    public function __construct(array $clients)
+    {
+        parent::__construct($clients);
+        $this->clients = $this->clients;
     }
 
-    public function massWrite(string $data){
-        foreach($this->cluster->getClients() as $client){
+    public function massWrite(string $data)
+    {
+        foreach ($this->getClients() as $client) {
             $client->write($data);
         }
     }
 
-    public function massSet(string $key, mixed $value, DateTime $ttl){
-        foreach($this->cluster->getClients() as $client){
+    public function massSet(string $key, mixed $value, DateTime $ttl)
+    {
+        foreach ($this->getClients() as $client) {
             $client->set($key, $value, $ttl);
         }
     }

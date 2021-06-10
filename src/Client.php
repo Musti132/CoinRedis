@@ -2,24 +2,20 @@
 
 namespace CoinRedis;
 
-require __DIR__ . '/../vendor/autoload.php';
-
 use CoinRedis\Exceptions\NegativeTime;
 use CoinRedis\Exceptions\RedisError;
 use CoinRedis\Exceptions\RedisKeyError;
-use Socket\Raw\Factory;
 use Socket\Raw\Socket;
 use DateTime;
 
-class Client
+class Client extends Connection
 {
     public $data;
 
     private const DELETE_KEY_DOESNT_EXIST_CODE = 0;
     private const GET_KEY_DOESNT_EXIST_CODE = -1;
-    private $connector;
-    private $factory;
-    private $host;
+
+    private Socket $connector;
 
     private array $remove = [
         '$5\r',
@@ -29,31 +25,13 @@ class Client
         '$',
     ];
 
-    public function __construct(string $ip, int $port, array $options = null)
+    public function __construct(string $ip, int $port, array $options = null, bool $async = true)
     {
-        $this->host = $ip . ":" . $port;
+        parent::__construct($ip, $port, $options);
 
-        $this->factory = new Factory();
+        $this->connector = $this->connection();
 
-        $this->connector = $this->factory->createClient($this->host);
-    }
-
-    public function write(string $data)
-    {
-        $this->connector->write($data . "\r\n");
-
-        $data = $this->read($this->connector);
-
-        return $data;
-    }
-
-    public function read(Socket $socket)
-    {
-        $data = $socket->read(8192);
-
-        $formatted = $this->formatData($data);
-
-        return $formatted;
+        $this->manageAsync($async);
     }
 
     public function set(string $key, mixed $value, DateTime $ttl = null)
@@ -71,6 +49,13 @@ class Client
         return $this->write($writeToSocket);
     }
 
+    /**
+     * Delete key(s) from the server
+     * 
+     * @param string|array $keys Accept both a string or a array of keys
+     * @throws CoinRedis\Exceptions\RedisKeyError If key is not found
+     * @return string
+     */
     public function delete(string|array $keys)
     {
         if (is_array($keys)) {
@@ -101,6 +86,12 @@ class Client
         return $this->write(sprintf("DEL %s", $keys));
     }
 
+    /**
+     * Get a specific key from the server.
+     * 
+     * @param string $key
+     * @return string 
+     */
     public function get(string $key)
     {
         $writeToSocket = sprintf("GET %s", $key);

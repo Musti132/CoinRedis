@@ -4,6 +4,9 @@ require __DIR__.'/vendor/autoload.php';
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\VarDumper;
+use CoinRedis\Client;
+use CoinRedis\ClusterArray;
+use CoinRedis\Cluster;
 
 date_default_timezone_set('Europe/Copenhagen');
 
@@ -13,32 +16,25 @@ VarDumper::setHandler(function ($var) {
     $dumper->dump($cloner->cloneVar($var));
 });
 
-use CoinRedis\Client;
-use CoinRedis\ClusterArray;
-use CoinRedis\Cluster;
-
-$clusterArray = new ClusterArray([
+$clusterArray = [
     new Client("127.0.0.1", 6379),
     new Client("127.0.0.1", 6379),
-]);
-
-$clusterArray->add("127.0.0.1", 6379);
-$clusterArray->add("127.0.0.1", 6379);
+];
 
 $cluster = new Cluster($clusterArray);
 
-$expire = new DateTime("2021-07-09 09:20:00");
+$ttl = new DateTime("2021-07-09 09:20:00");
 
-$cluster->massSet('USE2R', 1, $expire);
+$cluster->massSet('USE2R', "Testis", $ttl);
 
 $client = new Client("127.0.0.1", 6379);
 
-$test = $client->set('title', "HELLO", $expire);
+$test = $client->set('title', "HELLO", $ttl);
 
 $client->delete('title');
 
-$test = $client->set('title', "HELLO", $expire);
+$test = $client->set('title', "HELLO", $ttl);
 
-dump($client->get("title"));
+echo($client->get("title"));
 
-dump($test);
+echo($test);

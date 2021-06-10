@@ -1,12 +1,12 @@
 {
     "require": {
-        "react/socket": "^1.6",
-        "illuminate/collections": "^8.43"
+        "illuminate/collections": "^8.43",
+        "clue/socket-raw": "^1.5"
     },
     "autoload": {
         "psr-4": {
-            "Exceptions\\": "Redis/Exceptions",
-            "CoinRedis\\": "Redis/",
+            "Exceptions\\": "src/Exceptions",
+            "CoinRedis\\": "src/",
             "React\\": "react/"
         }
     }

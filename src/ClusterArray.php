@@ -23,16 +23,16 @@ class ClusterArray
 
             $this->hosts->add($client->host());
         }
-        
     }
 
-    public function add(string $ip, int $port){
+    public function add(string $ip, int $port)
+    {
         $client = new Client($ip, $port);
 
         $this->clients[] = $client;
 
         $this->hosts->add($client->host());
-        
+
         return $this;
     }
 

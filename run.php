@@ -15,7 +15,7 @@ VarDumper::setHandler(function ($var) {
     $dumper = new CliDumper();
     $dumper->dump($cloner->cloneVar($var));
 });
-
+/*
 $clusterArray = [
     new Client("127.0.0.1", 6379),
     new Client("127.0.0.1", 6379),
@@ -25,8 +25,10 @@ $cluster = new Cluster($clusterArray);
 
 $ttl = new DateTime("2021-07-09 09:20:00");
 
-$cluster->massSet('USE2R', "Testis", $ttl);
+$cluster->massSet('USER', "Testis", $ttl);
+*/
 
+/*
 $client = new Client("127.0.0.1", 6379);
 
 $test = $client->set('title', "HELLO", $ttl);
@@ -34,7 +36,9 @@ $test = $client->set('title', "HELLO", $ttl);
 $client->delete('title');
 
 $test = $client->set('title', "HELLO", $ttl);
-
+$client->set('title2', "HELLO", $ttl);
+$client->set('title3', "HELLO", $ttl);
+$client->delete('title2');
 echo($client->get("title"));
 
-echo($test);
+echo($test);*/

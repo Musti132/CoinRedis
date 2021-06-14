@@ -105,11 +105,6 @@ class Client extends Connection
         return $data;
     }
 
-    public function isOk($data)
-    {
-        return $data != "0" ? true : false;
-    }
-
     public function host()
     {
         return $this->host;

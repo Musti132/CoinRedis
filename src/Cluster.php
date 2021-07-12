@@ -21,7 +21,7 @@ class Cluster extends ClusterArray
         }
     }
 
-    public function massSet(string $key, mixed $value, DateTime $ttl)
+    public function massSet(string $key, $value, DateTime $ttl)
     {
         foreach ($this->getClients() as $client) {
             $client->set($key, $value, $ttl);

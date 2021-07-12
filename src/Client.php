@@ -34,7 +34,16 @@ class Client extends Connection
         $this->manageAsync($async);
     }
 
-    public function set(string $key, mixed $value, DateTime $ttl = null)
+    /**
+     * Stores a key on the server with a value and optionally a expiration time.
+     * 
+     * @param string $key Key name to set
+     * @param mixed $value Value of key
+     * @param DateTime|null $ttl Expiration time on key
+     * @throws CoinRedis\Exceptions\NegativeTime Will throw this exception if the expiration time is negative or zero
+     * @return string
+     */
+    public function set(string $key, $value, DateTime $ttl = null)
     {
         $now = new DateTime();
 
@@ -43,10 +52,23 @@ class Client extends Connection
         if ($seconds <= 0) {
             throw new NegativeTime("Calculated time is negative or zero");
         }
+        
+        if(is_array($value)) {
+            //$writeToSocket = vprintf("SETEX %s %d %s\r\n", $key, $seconds, $value);
+            $value = json_encode(serialize($value));
+        }
 
         $writeToSocket = sprintf("SETEX %s %d %s\r\n", $key, $seconds, $value);
 
         return $this->write($writeToSocket);
+    }
+
+    public function getList(string $key) {
+        $value = $this->get($key);
+
+        echo $value;
+
+        return unserialize($value);
     }
 
     /**
@@ -56,7 +78,7 @@ class Client extends Connection
      * @throws CoinRedis\Exceptions\RedisKeyError If key is not found
      * @return string
      */
-    public function delete(string|array $keys)
+    public function delete($keys)
     {
         if (is_array($keys)) {
             return $this->deleteMultiple($keys);
@@ -73,6 +95,28 @@ class Client extends Connection
         return $data;
     }
 
+
+    /**
+     * Update a key
+     * 
+     * @param string $key Key to update
+     * @return mixed
+     */
+    public function update(string $key, $value, DateTime $ttl)
+    {
+        if (!$this->get($key)) {
+            throw new RedisKeyError("Key doesnt exist");
+        }
+
+        return $this->set($key, $value, $ttl);
+    }
+
+    /**
+     * Delete multiple keys at once.
+     * 
+     * @param array $keys An Array of keys
+     * @return string
+     */
     public function deleteMultiple(array $keys)
     {
         foreach ($keys as $key) {

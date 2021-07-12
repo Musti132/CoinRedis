@@ -99,9 +99,11 @@ class Connection
                 return $count;
 
             case ':':
-                $integer = (int) $payload;
+                //$integer = (int) $payload;
+                $integer = str_replace(':', '', $payload);
+                //return $integer == $payload ? $integer : $payload;
 
-                return $integer == $payload ? $integer : $payload;
+                return $integer;
 
             case '-':
                 return ($payload);

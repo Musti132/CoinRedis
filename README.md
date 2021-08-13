@@ -1,3 +1,3 @@
 # CoinRedis
 
-Redis client for multi redis servers.
+Redis client for multiple redis servers.

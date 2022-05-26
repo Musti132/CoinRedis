@@ -1,7 +1,8 @@
 {
     "require": {
         "illuminate/collections": "^8.43",
-        "clue/socket-raw": "^1.5"
+        "clue/socket-raw": "^1.6",
+        "php": "^8.0"
     },
     "autoload": {
         "psr-4": {

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa219b932b9472c7fc86eb78f001bab7",
+    "content-hash": "38a997e9f89f417a6917064083010806",
     "packages": [
         {
             "name": "clue/socket-raw",
-            "version": "v1.5.0",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/clue/php-socket-raw.git",
-                "reference": "089ffa05fa75bdc4e919aac44bbc435b3ef640ef"
+                "url": "https://github.com/clue/socket-raw.git",
+                "reference": "91e9f619f6769f931454a9882c21ffd7623d06cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clue/php-socket-raw/zipball/089ffa05fa75bdc4e919aac44bbc435b3ef640ef",
-                "reference": "089ffa05fa75bdc4e919aac44bbc435b3ef640ef",
+                "url": "https://api.github.com/repos/clue/socket-raw/zipball/91e9f619f6769f931454a9882c21ffd7623d06cb",
+                "reference": "91e9f619f6769f931454a9882c21ffd7623d06cb",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
                 }
             ],
             "description": "Simple and lightweight OOP wrapper for PHP's low-level sockets extension (ext-sockets).",
-            "homepage": "https://github.com/clue/php-socket-raw",
+            "homepage": "https://github.com/clue/socket-raw",
             "keywords": [
                 "Socket",
                 "client",
@@ -60,8 +60,8 @@
                 "unix"
             ],
             "support": {
-                "issues": "https://github.com/clue/php-socket-raw/issues",
-                "source": "https://github.com/clue/php-socket-raw/tree/v1.5.0"
+                "issues": "https://github.com/clue/socket-raw/issues",
+                "source": "https://github.com/clue/socket-raw/tree/v1.6.0"
             },
             "funding": [
                 {
@@ -73,20 +73,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-27T13:16:18+00:00"
+            "time": "2022-04-14T14:58:06+00:00"
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.43.0",
+            "version": "v8.83.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "deccb956d38710f3f8baf36dd876c3fa1585ec22"
+                "reference": "fc232e89c0214dba5d2b431220a24b02d480a472"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/deccb956d38710f3f8baf36dd876c3fa1585ec22",
-                "reference": "deccb956d38710f3f8baf36dd876c3fa1585ec22",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/fc232e89c0214dba5d2b431220a24b02d480a472",
+                "reference": "fc232e89c0214dba5d2b431220a24b02d480a472",
                 "shasum": ""
             },
             "require": {
@@ -95,7 +95,7 @@
                 "php": "^7.3|^8.0"
             },
             "suggest": {
-                "symfony/var-dumper": "Required to use the dump method (^5.1.4)."
+                "symfony/var-dumper": "Required to use the dump method (^5.4)."
             },
             "type": "library",
             "extra": {
@@ -104,12 +104,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Illuminate\\Support\\": ""
-                },
                 "files": [
                     "helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "Illuminate\\Support\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -127,20 +127,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-04-22T21:08:09+00:00"
+            "time": "2022-03-25T14:53:23+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.43.0",
+            "version": "v8.83.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "b9a7cf6acf1d05d863b6ef67c00cdb0e4ccea097"
+                "reference": "5e0fd287a1b22a6b346a9f7cd484d8cf0234585d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/b9a7cf6acf1d05d863b6ef67c00cdb0e4ccea097",
-                "reference": "b9a7cf6acf1d05d863b6ef67c00cdb0e4ccea097",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/5e0fd287a1b22a6b346a9f7cd484d8cf0234585d",
+                "reference": "5e0fd287a1b22a6b346a9f7cd484d8cf0234585d",
                 "shasum": ""
             },
             "require": {
@@ -175,20 +175,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-05-21T19:16:29+00:00"
+            "time": "2022-01-13T14:47:47+00:00"
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.43.0",
+            "version": "v8.83.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
-                "reference": "300aa13c086f25116b5f3cde3ca54ff5c822fb05"
+                "reference": "aed81891a6e046fdee72edd497f822190f61c162"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/macroable/zipball/300aa13c086f25116b5f3cde3ca54ff5c822fb05",
-                "reference": "300aa13c086f25116b5f3cde3ca54ff5c822fb05",
+                "url": "https://api.github.com/repos/illuminate/macroable/zipball/aed81891a6e046fdee72edd497f822190f61c162",
+                "reference": "aed81891a6e046fdee72edd497f822190f61c162",
                 "shasum": ""
             },
             "require": {
@@ -221,24 +221,24 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2020-10-27T15:20:30+00:00"
+            "time": "2021-11-16T13:57:03+00:00"
         },
         {
             "name": "psr/container",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea",
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.0"
+                "php": ">=7.4.0"
             },
             "type": "library",
             "autoload": {
@@ -267,9 +267,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container/tree/1.1.1"
+                "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
-            "time": "2021-03-05T17:36:06+00:00"
+            "time": "2021-11-05T16:50:12+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -329,7 +329,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "~8.0"
+    },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }

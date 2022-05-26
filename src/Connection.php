@@ -76,11 +76,13 @@ class Connection
 
         $prefix = $data[0];
 
+
         $payload = $data;
+
 
         switch ($prefix) {
             case '+':
-                return substr($payload, 1);
+                return substr($payload, 2);
 
             case '$':
                 $size = (int) $payload;
@@ -88,7 +90,7 @@ class Connection
                     return;
                 }
 
-                return substr($data, 2, -2);
+                return trim(substr($data, 3, -2));
 
             case '*':
                 $count = (int) $payload;

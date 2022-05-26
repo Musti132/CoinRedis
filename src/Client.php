@@ -52,23 +52,24 @@ class Client extends Connection
         if ($seconds <= 0) {
             throw new NegativeTime("Calculated time is negative or zero");
         }
-        
-        if(is_array($value)) {
+
+        if (is_array($value)) {
             //$writeToSocket = vprintf("SETEX %s %d %s\r\n", $key, $seconds, $value);
-            $value = json_encode(serialize($value));
+            $value = serialize($value);
         }
 
-        $writeToSocket = sprintf("SETEX %s %d %s\r\n", $key, $seconds, $value);
+        $writeToSocket = sprintf("SETEX %s %d '%s'\r\n", $key, $seconds, $value);
 
         return $this->write($writeToSocket);
     }
 
-    public function getList(string $key) {
+    public function getList(string $key)
+    {
         $value = $this->get($key);
 
-        echo $value;
+        //echo $value;
 
-        return unserialize($value);
+        return json_decode($value);
     }
 
     /**
@@ -146,8 +147,22 @@ class Client extends Connection
             throw new RedisKeyError("Key doesnt exist");
         }
 
-        return $data;
+        if($this->is_serial($data)) {
+            return unserialize($data);
+        }
+
+        return trim($data);
     }
+
+    /**
+     * Check if a string is serialized
+     * @param string $string
+     */
+    public static function is_serial($string)
+    {
+        return (@unserialize($string) !== false);
+    }
+
 
     public function host()
     {

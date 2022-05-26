@@ -24,24 +24,21 @@ $clusterArray = [
 
 $cluster = new Cluster($clusterArray);
 
-$ttl = new DateTime("2021-08-09 09:20:00");
+$ttl = new DateTime("2022-05-27 17:20:00");
 
-$cluster->massSet('USER', "Testis", $ttl);
+//$cluster->massSet('USER', "Testis", $ttl);
 
 $client = new Client("127.0.0.1", 6379);
 
-$test = $client->set('title', "HELLO", $ttl);
+//$test = $client->set('title', "HELLO", $ttl);
 
 //$client->delete('title');
 
-$test = $client->set('title', [
-    'test',
-    'test',
-], $ttl);
-$client->set('title2', "HELLO2", $ttl);
-$client->set('title3', "HELLO3", $ttl);
-$client->delete([
-    'title2',
-    'title3',
-]);
-echo($client->getList("title"));
+// $test = $client->set('title5', [
+//     'test2',
+//     'test',
+// ], $ttl);
+
+$client->set('title5', 'Test', $ttl);
+
+echo $client->get('title5');

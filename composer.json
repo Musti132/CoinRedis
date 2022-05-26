@@ -10,5 +10,8 @@
             "CoinRedis\\": "src/",
             "React\\": "react/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
     }
 }

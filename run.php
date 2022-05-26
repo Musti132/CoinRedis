@@ -39,6 +39,9 @@ $client = new Client("127.0.0.1", 6379);
 //     'test',
 // ], $ttl);
 
-$client->set('title5', 'Test', $ttl);
+$client->set('title5', null, $ttl);
 
-echo $client->get('title5');
+
+var_dump($client->get('title5'));
+var_dump($client->get('USER'));
+var_dump($client->get('not'));

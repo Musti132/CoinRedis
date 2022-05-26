@@ -74,24 +74,39 @@ class Connection
 
         $data = $socket->read($this->bytes);
 
+        $data = str_replace('+OK', '', $data);
+
         $prefix = $data[0];
 
+        $payload = trim($data);
 
-        $payload = $data;
-
-
+        /**
+         * Determine Data Type 
+         * 
+         * RESP Protocol description (https://redis.io/docs/reference/protocol-spec/#resp-protocol-description)
+         */
         switch ($prefix) {
+
+            // Simple String
             case '+':
                 return substr($payload, 2);
-
+            
+            // Bulk Strings
             case '$':
                 $size = (int) $payload;
+
                 if ($size === -1) {
                     return;
                 }
 
-                return trim(substr($data, 3, -2));
+                if($payload == "$-1") {
+                    return null;
+                }
 
+
+                return trim(substr($data, 2, -2));
+
+            // Arrays
             case '*':
                 $count = (int) $payload;
 
@@ -99,14 +114,16 @@ class Connection
                     return;
                 }
                 return $count;
-
+            
+            // Integers
             case ':':
                 //$integer = (int) $payload;
                 $integer = str_replace(':', '', $payload);
                 //return $integer == $payload ? $integer : $payload;
 
                 return $integer;
-
+            
+            // Errors
             case '-':
                 return ($payload);
 

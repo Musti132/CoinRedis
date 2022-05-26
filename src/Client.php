@@ -54,7 +54,6 @@ class Client extends Connection
         }
 
         if (is_array($value)) {
-            //$writeToSocket = vprintf("SETEX %s %d %s\r\n", $key, $seconds, $value);
             $value = serialize($value);
         }
 
@@ -143,7 +142,7 @@ class Client extends Connection
 
         $data = $this->write($writeToSocket);
 
-        if ($data == self::GET_KEY_DOESNT_EXIST_CODE) {
+        if ($data === null) {
             throw new RedisKeyError("Key doesnt exist");
         }
 

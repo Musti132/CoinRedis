@@ -25,13 +25,11 @@ class Client extends Connection
         '$',
     ];
 
-    public function __construct(string $ip, int $port, array $options = null, bool $async = true)
+    public function __construct(string $ip, int $port, array $options = null)
     {
         parent::__construct($ip, $port, $options);
 
         $this->connector = $this->connection();
-
-        $this->manageAsync($async);
     }
 
     /**

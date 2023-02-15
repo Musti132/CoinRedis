@@ -11,7 +11,6 @@ use DateTime;
 class Connection
 {
     public string $host;
-    public bool $async;
     public int $bytes = 8192;
 
     private Socket $connector;
@@ -46,11 +45,6 @@ class Connection
      */
     public function write(string $data)
     {
-        if ($this->async === true) {
-            while ($this->connector->selectWrite() !== true) {
-            }
-        }
-
         $this->connector->write($data . "\r\n");
 
         $data = $this->read($this->connector);
@@ -67,11 +61,6 @@ class Connection
      */
     public function read(Socket $socket)
     {
-        if ($this->async === true) {
-            while ($this->connector->selectRead() !== true) {
-            }
-        }
-
         $data = $socket->read($this->bytes);
 
         $data = str_replace('+OK', '', $data);
@@ -144,20 +133,6 @@ class Connection
     public function connection()
     {
         return $this->connector;
-    }
-
-
-    /**
-     * Used for enabling non-blocking I/O (async)
-     * 
-     * @param bool $status status of non-blocking 
-     * 
-     * @return void
-     */
-    public function manageAsync(bool $status)
-    {
-        $this->async = !$status;
-        $this->connector->setBlocking($status);
     }
 
     /**
